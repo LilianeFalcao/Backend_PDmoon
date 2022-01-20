@@ -16,7 +16,7 @@ export default class AuthController {
       const {email,password} = request.all()
       const token = await auth.use('api').attempt(email,password)
       const user = await User.findByOrFail("email",email)
-      return {token,user}
+      return {...token,user}
     }catch (erro){
         response.status(401).send("Login e/ou senha incorretos!")
     }
